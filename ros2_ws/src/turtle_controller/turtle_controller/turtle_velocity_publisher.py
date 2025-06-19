@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 
 import rclpy
@@ -6,19 +7,20 @@ from geometry_msgs.msg import Twist
 
 class TurtleController(Node):
     def __init__(self):
-        super().__init__('turtle_controller')
-        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
-        timer_period = 0.5  # seconds
-        self.timer = self.create_timer(timer_period, self.publish_velocity)
-        self.get_logger().info("TurtleBot controller started")
+        super().__init__("turtlebot_controller")
+        self.cmd_vel_publisher_ = self.create_publisher(
+                Twist, "/cmd_vel", 10)
+        self.get_logger().info("Publisher created")
+        self.timer = self.create_timer(0.5,self.publish_cmd)
 
-    def publish_velocity(self):
-        msg = Twist()
-        msg.linear.x = 0.2       # Forward motion (m/s)
-        msg.angular.z = 0.5      # Rotational speed (rad/s)
-        self.publisher_.publish(msg)
-        self.get_logger().info(f'Publishing: linear={msg.linear.x}, angular={msg.angular.z}')
+    def publish_cmd(self):
+        cmd = Twist()
+        cmd.linear.x = 0.2
+        cmd.angular.z = 0.2
+        self.cmd_vel_publisher_.publish(cmd)
+        self.get_logger().info(f"Velocity Thing: {cmd.linear.x} , {cmd.angular.z}")
 
+    
 def main(args=None):
     rclpy.init(args=args)
     node = TurtleController()
