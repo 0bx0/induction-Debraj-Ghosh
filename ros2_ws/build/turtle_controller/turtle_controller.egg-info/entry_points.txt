@@ -1,3 +1,0 @@
-[console_scripts]
-turtle_velocity = turtle_controller.turtle_velocity_publisher:main
-
