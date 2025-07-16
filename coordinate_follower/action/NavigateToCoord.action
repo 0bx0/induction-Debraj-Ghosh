@@ -1,0 +1,10 @@
+# Coordinates
+float64 x_coordinates
+float64 y_coordinates
+---
+
+# Result
+bool success
+
+---
+# No feedback required, I figured that out late so turns out I have useless packages, I can't be asked to remove them
